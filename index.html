@@ -1,0 +1,157 @@
+<!doctype html>
+<html class="no-js" lang="">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>BitCanvas</title>
+  <link rel="stylesheet" href="css/style.css">
+  <meta name="description" content="">
+
+  <meta property="og:title" content="">
+  <meta property="og:type" content="">
+  <meta property="og:url" content="">
+  <meta property="og:image" content="">
+  <meta property="og:image:alt" content="">
+
+  <link rel="icon" href="/favicon.ico" sizes="any">
+  <link rel="icon" href="/icon.svg" type="image/svg+xml">
+  <link rel="apple-touch-icon" href="icon.png">
+
+  <link rel="manifest" href="site.webmanifest">
+  <meta name="theme-color" content="#fafafa">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=IBM+Plex+Mono:ital,wght@0,100;0,200;0,300;0,400;0,500;0,600;0,700;1,100;1,200;1,300;1,400;1,500;1,600;1,700&family=Press+Start+2P&family=VT323&display=swap" rel="stylesheet">
+
+</head>
+
+<body>
+
+  <header class="app-header">
+    <div class="header-banner">
+      <div class="header-banner-inner">
+        <div class="app-head">
+          <h1>BitCanvas</h1>
+          <p>Draw one cell at a time</p>
+        </div>
+        <div class="file-options">
+          <div class="button-back red">
+            <button class="top-button top-button-new">
+              <span>New Canvas</span>
+            </button>
+          </div>
+          <div class="button-back blue">
+            <button class="top-button top-button-save">
+              <span>Save</span>
+            </button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+  <div class="main-content-container">
+
+    <div class="toolbar">
+      <div class="inner-toolbar">
+        <div class="main-tools">
+          <h2>TOOLS</h2>
+          <div class="button-frame">
+            <button class="toolbar-button" data-tool="brush">
+              <img src="img/tools/brush.svg" alt="brush-icon">
+              <span>Brush</span>
+            </button>
+          </div>
+          <div class="button-frame">
+            <button class="toolbar-button" data-tool="eraser">
+              <img src="img/tools/eraser.svg" alt="brush-icon">
+              <span>Eraser</span>
+            </button>
+          </div>
+          <div class="button-frame">
+            <button class="toolbar-button" data-tool="fill">
+              <img src="img/tools/fill.svg" alt="brush-icon">
+              <span>Fill</span>
+            </button>
+          </div>
+          <div class="button-frame">
+            <button class="toolbar-button" data-tool="picker">
+              <img src="img/tools/pick.svg" alt="brush-icon">
+              <span>Picker</span>
+            </button>
+          </div>
+        </div>
+
+        <div class="color-tools">
+          <h2>Colors</h2>
+
+          <div class="color-grid">
+
+            <div class="color-cell" id="color-black">Black</div>
+            <div class="color-cell" id="color-white">White</div>
+            <div class="color-cell" id="color-red">Red</div>
+            <div class="color-cell" id="color-orange">Orange</div>
+            <div class="color-cell" id="color-yellow">Yellow</div>
+            <div class="color-cell" id="color-green">Green</div>
+            <div class="color-cell" id="color-blue">Blue</div>
+            <div class="color-cell" id="color-purple">Purple</div>
+            <div class="color-cell" id="color-gray">Gray</div>
+            <div class="color-cell" id="color-brown">Brown</div>
+            <div class="color-cell" id="color-navy">Navy</div>
+
+            <div class="color-cell" id="color-mix">Mix</div>
+            <input type="color" id="color-picker" style="display: none;">
+          </div>
+        </div>
+
+        <div class="canvas-options">
+          <h2>Canvas</h2>
+          <div class="grid-size-option">
+            <label for="grid-size">Grid</label>
+            <input type="range" id="grid-size" min="2" max="100" value="32" step="2">
+          </div>
+          <div class="canvas-zoom-option">
+            <label for="canvas-size">Zoom</label>
+            <input type="range" id="canvas-size" min="1" max="10" value="1" step="1">
+          </div>
+        </div>
+
+        <div class="action-options">
+          <h2>Actions</h2>
+          <div class="action-tools">
+            <div class="action-button-frame">
+              <button class="action-button">
+                <img src="img/tools/undo.svg" alt="undo-icon">
+                <span>Undo</span>
+              </button>
+            </div>
+            <div class="action-button-frame">
+              <button class="action-button">
+                <img src="img/tools/redo.svg" alt="redo-icon">
+                <span>Redo</span>
+              </button>
+            </div>
+          </div>
+        </div>
+
+
+      </div>
+
+    </div>
+
+    <div class="workspace">
+      <div class="inner-workspace">
+        <div id="pixel-grid" class="canvas-grid">
+
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <script src="js/app.js"></script>
+
+</body>
+
+</html>
