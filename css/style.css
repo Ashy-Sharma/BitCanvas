@@ -555,9 +555,7 @@ input[type="range"]::-webkit-slider-runnable-track{
 }
 .canvas-grid {
   touch-action: none;
-}
-body {
-  touch-action: manipulation;
+  user-select: none;
 }
 
 

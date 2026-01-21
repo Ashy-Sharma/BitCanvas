@@ -55,6 +55,9 @@ function applyTransform(){
 }
 
 workspace.addEventListener("mousedown", (e) =>{
+  if(isPainting){
+    return;
+  }
   if( !isSpacePressed){
     return;
   }
@@ -137,11 +140,13 @@ canvas.addEventListener("pointerdown", (e) =>{
     return;
   }
 
-  const pixel = e.target.closest(".pixel-cell");
+  const pixel = getPixelFromPointer(e);
+
   if(!pixel){
     return;
   }
 
+  e.preventDefault();
   canvas.setPointerCapture(e.pointerId);
 
   const index = [...canvas.children].indexOf(pixel);
@@ -170,17 +175,14 @@ canvas.addEventListener("pointerdown", (e) =>{
 canvas.addEventListener("pointermove", (e) => {
   if (!isPainting) return;
 
-  const pixel = e.target.closest(".pixel-cell");
+  const pixel = getPixelFromPointer(e);
   if (!pixel) return;
 
   paintPixels(pixel);
 });
 
 
-window.addEventListener("mouseup", () => {
-  isPainting = false;
-  finalizeAction();
-});
+
 
 function setCurrentColor(color){
   currentColor = color;
@@ -381,8 +383,8 @@ function saveAsPng(){
   const scale = EXPORT_SCALE;
 
   const exportCanvas = document.createElement("canvas");
-  exportCanvas.width = size * size;
-  exportCanvas.height = size * size;
+  exportCanvas.width = size * EXPORT_SCALE;
+  exportCanvas.height = size * EXPORT_SCALE;
 
   const ctx = exportCanvas.getContext("2d");
   ctx.imageSmoothingEnabled = false;
@@ -466,4 +468,22 @@ function stopPainting(e){
   try{
     canvas.releasePointerCapture(e.pointerId);
   }catch {}
+}
+
+function getPixelFromPointer(e){
+  const rect = canvas.getBoundingClientRect();
+  const x = (e.clientX - rect.left) / zoom;
+  const y = (e.clientY - rect.top) / zoom;
+
+  const cellSize = rect.width / gridSize;
+
+  const col = Math.floor(x / cellSize);
+  const row = Math.floor(y / cellSize);
+
+  if (row < 0 || col < 0 || row >= gridSize || col >= gridSize) {
+    return null;
+  }
+
+  const index = row * gridSize + col;
+  return canvas.children[index];
 }
