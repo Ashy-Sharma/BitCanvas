@@ -553,5 +553,11 @@ input[type="range"]::-webkit-slider-runnable-track{
 .inner-workspace.panning:active {
   cursor: grabbing;
 }
+.canvas-grid {
+  touch-action: none;
+}
+body {
+  touch-action: manipulation;
+}
 
 

@@ -131,9 +131,9 @@ function paintPixels(pixel) {
 
 }
 
-canvas.addEventListener("mousedown", (e) =>{
+canvas.addEventListener("pointerdown", (e) =>{
 
-  if(e.button !== 0){
+  if( e.pointerType === "mouse" && e.button !== 0){
     return;
   }
 
@@ -141,6 +141,8 @@ canvas.addEventListener("mousedown", (e) =>{
   if(!pixel){
     return;
   }
+
+  canvas.setPointerCapture(e.pointerId);
 
   const index = [...canvas.children].indexOf(pixel);
   const targetColor = getPixelColor(pixel);
@@ -165,7 +167,7 @@ canvas.addEventListener("mousedown", (e) =>{
 
 });
 
-canvas.addEventListener("mousemove", (e) => {
+canvas.addEventListener("pointermove", (e) => {
   if (!isPainting) return;
 
   const pixel = e.target.closest(".pixel-cell");
@@ -451,3 +453,17 @@ document.querySelector(".top-button-new").addEventListener("click", () =>{
   }
   newCanvas(32);
 });
+
+canvas.addEventListener("pointerup" , stopPainting);
+canvas.addEventListener("pointercancel", stopPainting);
+
+function stopPainting(e){
+  if (!isPainting){
+    return;
+  }
+  isPainting = false;
+  finalizeAction();
+  try{
+    canvas.releasePointerCapture(e.pointerId);
+  }catch {}
+}
